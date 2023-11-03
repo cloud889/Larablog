@@ -29,10 +29,6 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('larablogs', LarablogController::class)
-->only(['index','store','edit','update','show','destroy'])
-->middleware(['auth','verified']);
-
 // Route::get('myblogs', function(){
 //     return view('larablogs.myblogs', [
 //         'blogs'=> Larablog::with('user')->latest()->get(),
@@ -41,7 +37,7 @@ Route::resource('larablogs', LarablogController::class)
 
 Route::get('myblogs', function(){
     $user = Auth::user();
-    
+
     $blogs = Larablog::where('user_id', $user->id)
         ->with('user')
         ->latest()
@@ -54,6 +50,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->prefix('larablogs')->name('larablogs.')->group(function () {
+    Route::get('/index',[LarablogController::class,'index'])->name('index');
+    Route::delete('/destroy/{larablog}',[LarablogController::class,'destroy'])->name('destroy');
+    Route::patch('/{larablog}', [LarablogController::class,'update'])->name('update');
+    Route::get('/edit',[LarablogController::class,'edit'])->name('edit');
+    Route::post('store',[LarablogController::class,'store'])->name('store');
+    Route::get('/show/{larablog}', [LarablogController::class,'show'])->name('show');
 });
 
 require __DIR__.'/auth.php';

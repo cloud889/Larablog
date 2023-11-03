@@ -25,7 +25,7 @@ class LarablogController extends Controller
     public function index():View
     {
         return view('larablogs.index',[
-            'blogs' => Larablog::with('user')->latest()->get(),  
+            'blogs' => Larablog::with('user')->latest()->get(),
         ]);
     }
 
@@ -57,7 +57,7 @@ class LarablogController extends Controller
      */
     public function show(Larablog $larablog): View
     {
-       
+
         return view('larablogs.show', [
             'blog' => $larablog,
         ]);

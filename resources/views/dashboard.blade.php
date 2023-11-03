@@ -9,7 +9,7 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                   <h1>Welcome {{Auth::user()->name}} to larablogs</h1>            
+                   <h1>Welcome {{Auth::user()->name}} to larablogs</h1>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                             </x-dropdown>
                         @endif
                         </div>
-                       
+
                         <div class="mt-3 text-lg">
                             <h3 class="font-semibold">{{$blog->title}}</h3>
                         </div>
@@ -60,10 +60,10 @@
                             <p class="mt-2 text-base text-gray-500">{{ $blog->message }}</p>
                         </div>
                         <div class="mt-3 text-gray-300 transition ease-in-out hover:text-gray-500">
-                            <a href="{{ route('larablogs.show',$blog->id) }}" class="self-end">view blog</a>
+                            <a href="{{ route('larablogs.show',$blog) }}" class="self-end" onclick="return confirm('Are you sure you want to look')">view blog</a>
 
                         </div>
-                        
+
                     </div>
                 </div>
             @endforeach
