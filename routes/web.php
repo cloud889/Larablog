@@ -29,9 +29,9 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('larablogs', LarablogController::class)
-->only(['index','store','edit','update','show','destroy'])
-->middleware(['auth','verified']);
+// Route::resource('larablogs', LarablogController::class)
+// ->only(['edit','update'])
+// ->middleware(['auth','verified']);
 
 // Route::get('myblogs', function(){
 //     return view('larablogs.myblogs', [
@@ -56,9 +56,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function (){
-    
+// Route::middleware('auth')->prefix('larablogs')->name('larablogs.')->group(function (){
+//     Route::get('/index',[LarablogController::class, 'index'])->name('index');
+//     Route::delete('/destroy/{larablog}',[LarablogController::class, 'destroy'])->name('destroy');
+//     Route::patch('/{larablog}',[LarablogController::class, 'update'])->name('update');
+//     Route::get('/edit',[LarablogController::class, 'edit'])->name('edit');
+//     Route::post('store',[LarablogController::class, 'store'])->name('store');
+//     Route::get('/show/{larablog}', [LarablogController::class, 'show'])->name('show');
+// });
+
+Route::middleware('auth')->prefix('larablogs')->name('larablogs.')->group(function () {
+    Route::get('/index',[LarablogController::class,'index'])->name('index');
+    Route::delete('/destroy/{larablog}',[LarablogController::class,'destroy'])->name('destroy');
+    Route::patch('/{larablog}', [LarablogController::class,'update'])->name('update');
+    Route::get('/{larablog}/edit',[LarablogController::class,'edit'])->name('edit');
+    Route::post('store',[LarablogController::class,'store'])->name('store');
+    Route::get('/show/{larablog}', [LarablogController::class,'show'])->name('show');
 });
+
 
 // php artisan optimize, php artisan config:cache, php artisan cache:clear
 
