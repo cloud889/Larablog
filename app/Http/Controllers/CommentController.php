@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Larablog;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class CommentController extends Controller
 {
@@ -27,8 +29,22 @@ class CommentController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {  
+       $user = auth()->user();
+        
+        $validated = $request->validate([
+            'message' => 'required',
+            'larablog_id' => 'required',
+        ]);
+
+        $comment = new Comment([
+            'message'=> $validated['message'],
+            'larablog_id' => $validated['larablog_id']
+        ]);
+
+        $comment->user()->associate($user);
+        Comment::create($comment);
+        return redirect()->back()->with('success', 'Your data has been saved successfully.');
     }
 
     /**

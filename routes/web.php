@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Models\Larablog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -72,7 +73,10 @@ Route::middleware('auth')->prefix('larablogs')->name('larablogs.')->group(functi
     Route::get('/{larablog}/edit',[LarablogController::class,'edit'])->name('edit');
     Route::post('store',[LarablogController::class,'store'])->name('store');
     Route::get('/show/{larablog}', [LarablogController::class,'show'])->name('show');
+
 });
+
+Route::post('/comments',[CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 
 
 // php artisan optimize, php artisan config:cache, php artisan cache:clear

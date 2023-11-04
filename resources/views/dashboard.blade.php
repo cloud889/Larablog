@@ -60,7 +60,7 @@
                             <p class="mt-2 text-base text-gray-500">{{ $blog->message }}</p>
                         </div>
                         <div class="mt-3 text-gray-300 transition ease-in-out hover:text-gray-500">
-                            <a href="{{ route('larablogs.show',$blog->id) }}" class="self-end">view blog</a>
+                            <a href="{{ route('larablogs.show',$blog->id) }}" class="self-endt p">view blog</a>
 
                         </div>
                         
