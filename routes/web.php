@@ -56,4 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function (){
+    
+});
+
+// php artisan optimize, php artisan config:cache, php artisan cache:clear
+
 require __DIR__.'/auth.php';

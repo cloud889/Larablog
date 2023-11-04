@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blogs;
-use Illuminate\View\View;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class BlogsController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('larablogs.myblogs');
+        //
     }
 
     /**
@@ -35,7 +34,7 @@ class BlogsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blogs $blogs)
+    public function show(Comment $comment)
     {
         //
     }
@@ -43,7 +42,7 @@ class BlogsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Blogs $blogs)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -51,7 +50,7 @@ class BlogsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blogs $blogs)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -59,7 +58,7 @@ class BlogsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blogs $blogs)
+    public function destroy(Comment $comment)
     {
         //
     }
