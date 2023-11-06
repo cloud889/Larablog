@@ -48,7 +48,6 @@ class LarablogController extends Controller
         ]);
 
         $request->user()->larablogs()->create($validated);
-
         return redirect(route('dashboard'));
     }
 

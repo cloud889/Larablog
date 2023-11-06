@@ -31,6 +31,10 @@ class CommentController extends Controller
     public function store(Request $request)
     {  
        $user = auth()->user();
+       
+       $blog = Larablog::find($request);
+
+       
         
         $validated = $request->validate([
             'message' => 'required',

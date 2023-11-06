@@ -21,6 +21,6 @@ class Comment extends Model
 
     public function blog(): BelongsTo
     {
-        return $this->belongsTo(Blog::class);
+        return $this->belongsTo(Larablog::class);
     }
 }
