@@ -32,22 +32,30 @@ class CommentController extends Controller
     {  
        $user = auth()->user();
        
-       $blog = Larablog::find($request);
-
        
+
         
         $validated = $request->validate([
             'message' => 'required',
             'larablog_id' => 'required',
         ]);
 
+        $larablogId = $validated['larablog_id'];
+
+        $blog = Larablog::find($larablogId);
+
+        if (!$blog) {
+            // Handle the case where the blog post with the provided ID is not found
+            return redirect()->back()->with('error', 'The specified blog post was not found.');
+        }
+
         $comment = new Comment([
             'message'=> $validated['message'],
-            'larablog_id' => $validated['larablog_id']
+            'larablog_id' => $larablogId,
         ]);
 
         $comment->user()->associate($user);
-        Comment::create($comment);
+        $comment ->save();
         return redirect()->back()->with('success', 'Your data has been saved successfully.');
     }
 
